@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
 
 
 /* =========================================================
@@ -11,44 +11,6 @@
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-   TOKENS
-========================================================= */
-
-:root {
-    /* Cores da identidade */
-    --green-deep: #0F3D2E;
-    --green-moss: #3F6F52;
-    --green-signal: #8FE3B0;
-    --gold: #C99A44;
-    --ivory: #F3EFE6;
-    --ink: #12201A;
-
-    /* Interface */
-    --surface: #173327;
-    --surface-light: #1D3D30;
-
-    --text: var(--ivory);
-    --text-muted: #AAB9B0;
-
-    --border: rgba(243, 239, 230, 0.12);
-    --border-hover: rgba(143, 227, 176, 0.40);
-
-    /* Tipografia */
-    --font-editorial: "Newsreader", Georgia, serif;
-    --font-sans: "Manrope", Arial, sans-serif;
-    --font-mono: "JetBrains Mono", monospace;
-
-    /* Layout */
-    --container: 1100px;
-}
-
-
-/* =========================================================
-   BASE
-========================================================= */
-
 html {
     scroll-behavior: smooth;
 }
@@ -56,23 +18,42 @@ html {
 body {
     min-height: 100vh;
 
-    font-family: var(--font-sans);
-    line-height: 1.6;
-
-    color: var(--text);
-
     background:
         radial-gradient(
-            circle at 90% 0%,
-            rgba(63, 111, 82, 0.30),
-            transparent 30%
+            circle at 85% 5%,
+            rgba(63, 111, 82, 0.18),
+            transparent 28%
         ),
-        radial-gradient(
-            circle at 0% 70%,
-            rgba(15, 61, 46, 0.60),
-            transparent 35%
-        ),
-        var(--ink);
+        #f3efe6;
+
+    color: #12201a;
+
+    font-family: "Manrope", sans-serif;
+
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+    --deep-green: #0f3d2e;
+    --moss: #3f6f52;
+    --signal: #8fe3b0;
+    --gold: #c99a44;
+    --ivory: #f3efe6;
+    --ink: #12201a;
+
+    --border: rgba(15, 61, 46, 0.16);
+
+    --shadow:
+        0 20px 50px rgba(18, 32, 26, 0.08);
+
+    --radius: 18px;
 }
 
 
@@ -81,99 +62,146 @@ body {
 ========================================================= */
 
 .container {
-    width: min(var(--container), 90%);
+    width: min(1120px, calc(100% - 48px));
     margin-inline: auto;
 }
 
 
 /* =========================================================
-   HEADER / HERO
+   HEADER
 ========================================================= */
 
 header {
     position: relative;
 
-    padding: 90px 0 75px;
+    overflow: hidden;
 
-    border-bottom: 1px solid var(--border);
+    padding: 110px 0 100px;
 
-    text-align: center;
+    background: var(--deep-green);
+
+    color: var(--ivory);
 }
 
 
-/* Linha técnica acima do título */
+/* Grid técnico no fundo */
 
 header::before {
-    content: "ENVIRONMENT / SETUP";
+    content: "";
 
-    display: inline-block;
+    position: absolute;
+    inset: 0;
 
-    margin-bottom: 28px;
+    background-image:
+        linear-gradient(
+            rgba(143, 227, 176, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(143, 227, 176, 0.05) 1px,
+            transparent 1px
+        );
 
-    color: var(--green-signal);
+    background-size: 48px 48px;
 
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
 
-    letter-spacing: 0.12em;
+    pointer-events: none;
 }
 
 
-/* Linha decorativa */
+/* Mancha orgânica */
 
 header::after {
     content: "";
 
     position: absolute;
 
-    bottom: -1px;
-    left: 50%;
+    width: 420px;
+    height: 420px;
 
-    width: 70px;
-    height: 2px;
+    right: -180px;
+    top: -180px;
 
-    background: var(--green-signal);
+    border-radius: 50%;
 
-    transform: translateX(-50%);
+    background: rgba(63, 111, 82, 0.35);
+
+    filter: blur(20px);
 }
 
 
 /* =========================================================
-   TÍTULO PRINCIPAL
+   HEADER CONTENT
 ========================================================= */
 
-h1 {
-    margin-bottom: 25px;
+header .container {
+    position: relative;
+    z-index: 1;
+}
 
-    font-family: var(--font-editorial);
-    font-size: clamp(52px, 8vw, 88px);
-    font-weight: 500;
+header h1 {
+    margin-top: 25px;
+
+    font-family: "Newsreader", serif;
+
+    font-size: clamp(4rem, 9vw, 7.5rem);
+
+    font-weight: 400;
+
     font-style: italic;
 
-    line-height: 0.95;
-    letter-spacing: -3px;
+    line-height: 0.9;
+
+    letter-spacing: -0.05em;
 
     color: var(--ivory);
 }
 
 
-/* =========================================================
-   SUBTÍTULO
-========================================================= */
+/*
+   Pequeno marcador técnico acima do título.
+*/
+
+header h1::before {
+    content: "ENVIRONMENT / SETUP";
+
+    display: block;
+
+    margin-bottom: 22px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.75rem;
+
+    font-style: normal;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    color: var(--signal);
+}
+
 
 .subtitle {
-    width: min(680px, 100%);
-    margin-inline: auto;
+    max-width: 650px;
 
-    color: var(--text-muted);
+    margin-top: 35px;
 
-    font-size: 17px;
-    line-height: 1.75;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+
+    color: rgba(243, 239, 230, 0.75);
 }
 
 .subtitle strong {
-    color: var(--ivory);
+    color: var(--signal);
+
     font-weight: 700;
 }
 
@@ -183,7 +211,7 @@ h1 {
 ========================================================= */
 
 main {
-    padding-top: 0;
+    padding: 100px 0;
 }
 
 
@@ -191,58 +219,54 @@ main {
    SECTION
 ========================================================= */
 
-.section {
-    padding: 80px 0;
-}
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
 .section-title {
     position: relative;
 
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
 
-    font-family: var(--font-editorial);
-    font-size: clamp(34px, 5vw, 44px);
+    font-family: "Newsreader", serif;
+
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+
     font-weight: 500;
+
     font-style: italic;
 
     line-height: 1;
 
-    letter-spacing: -1px;
+    letter-spacing: -0.035em;
+
+    color: var(--deep-green);
 }
 
-
-/* marcador editorial */
-
 .section-title::before {
-    content: "//";
+    content: "01";
 
-    margin-right: 12px;
+    font-family: "JetBrains Mono", monospace;
 
-    color: var(--gold);
+    font-size: 0.7rem;
 
-    font-family: var(--font-mono);
-    font-size: 16px;
     font-style: normal;
+
     font-weight: 600;
 
-    vertical-align: middle;
+    letter-spacing: 0.08em;
+
+    color: var(--moss);
 }
 
 
 .section-description {
-    max-width: 680px;
+    max-width: 620px;
 
-    margin-bottom: 38px;
+    margin-top: 20px;
+    margin-bottom: 50px;
 
-    color: var(--text-muted);
+    color: rgba(18, 32, 26, 0.65);
 
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 1rem;
 }
 
 
@@ -253,7 +277,7 @@ main {
 .requirements {
     display: grid;
 
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 18px;
 }
@@ -269,129 +293,105 @@ main {
     display: flex;
     align-items: center;
 
-    min-height: 150px;
+    min-height: 190px;
 
-    gap: 20px;
+    padding: 28px;
 
-    padding: 24px;
+    border: 1px solid rgba(143, 227, 176, 0.18);
+
+    border-radius: var(--radius);
+
+    background: #0F3D2E;
+
+    color: #F3EFE6;
+
+    box-shadow:
+        0 12px 30px rgba(15, 61, 46, 0.12);
 
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(29, 61, 48, 0.65),
-            rgba(18, 32, 26, 0.75)
-        );
-
-    border: 1px solid var(--border);
-    border-radius: 8px;
-
     transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 220ms ease,
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease;
 }
 
-
-/* Linha lateral de status */
 
 .card::before {
     content: "";
 
     position: absolute;
 
-    top: 18px;
-    bottom: 18px;
     left: 0;
+    top: 0;
+    bottom: 0;
 
-    width: 2px;
+    width: 3px;
 
-    background: transparent;
+    background: #8FE3B0;
 
-    transition: background 0.25s ease;
-}
+    transform: scaleY(0);
 
+    transform-origin: bottom;
 
-/* pequeno detalhe técnico */
-
-.card::after {
-    content: "REQ";
-
-    position: absolute;
-
-    top: 12px;
-    right: 14px;
-
-    color: rgba(243, 239, 230, 0.25);
-
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 600;
-
-    letter-spacing: 0.08em;
+    transition: transform 220ms ease;
 }
 
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(36, 75, 59, 0.90),
-            rgba(18, 32, 26, 0.90)
-        );
+    border-color: rgba(143, 227, 176, 0.45);
 
-    border-color: var(--border-hover);
+    background: #123f30;
 
     box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.20);
+        0 20px 45px rgba(15, 61, 46, 0.2);
 }
 
 
 .card:hover::before {
-    background: var(--green-signal);
+    transform: scaleY(1);
 }
 
 
+
 /* =========================================================
-   ICON / IMAGE
+   IMAGE / ICON
 ========================================================= */
 
 .image-link {
-    display: block;
+    flex-shrink: 0;
 
-    flex: 0 0 70px;
+    display: grid;
+    place-items: center;
 
-    width: 70px;
-    height: 70px;
+    width: 78px;
+    height: 78px;
+
+    margin-right: 25px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid rgba(15, 61, 46, 0.1);
+
+    transition: transform 220ms ease;
+}
+
+
+.card:hover .image-link {
+    transform: rotate(-2deg) scale(1.04);
 }
 
 
 .icon {
-    display: block;
-
-    width: 70px;
-    height: 70px;
-
-    padding: 12px;
+    width: 48px;
+    height: 48px;
 
     object-fit: contain;
-
-    background: var(--ivory);
-
-    border: 1px solid rgba(18, 32, 26, 0.08);
-    border-radius: 6px;
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-.card:hover .icon {
-    transform: scale(1.04);
 }
 
 
@@ -400,43 +400,95 @@ main {
 ========================================================= */
 
 .card-content {
-    flex: 1;
-
-    min-width: 0;
+    padding-right: 25px;
 }
 
 
 .card h3 {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 
-    font-size: 18px;
-    font-weight: 700;
+    font-family: "Manrope", sans-serif;
 
-    line-height: 1.3;
+    font-size: 1.15rem;
+
+    font-weight: 800;
+
+    line-height: 1.2;
 }
 
 
 .card h3 a {
-    color: var(--ivory);
+    color: var(--deep-green);
 
     text-decoration: none;
 
-    transition: color 0.2s ease;
+    transition: color 180ms ease;
 }
 
 
 .card h3 a:hover {
-    color: var(--green-signal);
+    color: var(--moss);
 }
 
 
 .card p {
-    color: var(--text-muted);
+    max-width: 360px;
 
-    font-size: 13px;
+    font-size: 0.88rem;
 
-    line-height: 1.6;
+    line-height: 1.65;
+
+    color: rgba(18, 32, 26, 0.62);
 }
+
+
+/* =========================================================
+   TECHNICAL LABEL
+========================================================= */
+
+.card-content::before {
+    content: "REQUIRED";
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.58rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    color: #8FE3B0;
+}
+
+
+.card h3 a {
+    color: #F3EFE6;
+
+    text-decoration: none;
+
+    transition: color 180ms ease;
+}
+
+
+.card h3 a:hover {
+    color: #8FE3B0;
+}
+
+
+.card p {
+    max-width: 360px;
+
+    font-size: 0.88rem;
+
+    line-height: 1.65;
+
+    color: rgba(243, 239, 230, 0.68);
+}
+
 
 
 /* =========================================================
@@ -444,23 +496,41 @@ main {
 ========================================================= */
 
 .arrow {
-    flex: 0 0 auto;
+    position: absolute;
 
-    color: var(--green-moss);
+    right: 25px;
+    top: 24px;
 
-    font-family: var(--font-mono);
-    font-size: 18px;
+    display: grid;
+    place-items: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: var(--deep-green);
+
+    color: var(--signal);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.9rem;
+
+    opacity: 0;
+
+    transform: translate(-5px, 5px);
 
     transition:
-        color 0.2s ease,
-        transform 0.2s ease;
+        opacity 200ms ease,
+        transform 200ms ease;
 }
 
 
 .card:hover .arrow {
-    color: var(--green-signal);
+    opacity: 1;
 
-    transform: translateX(4px);
+    transform: translate(0, 0);
 }
 
 
@@ -471,79 +541,98 @@ main {
 .next-step {
     position: relative;
 
-    margin-top: 50px;
+    margin-top: 75px;
 
-    padding: 34px 36px;
+    padding: 55px;
+
+    border-radius: 24px;
+
+    background: var(--deep-green);
+
+    color: var(--ivory);
 
     overflow: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(63, 111, 82, 0.30),
-            rgba(18, 32, 26, 0.85)
-        );
-
-    border: 1px solid rgba(143, 227, 176, 0.20);
-    border-radius: 8px;
 }
 
 
-/* detalhe lateral */
-
-.next-step::after {
+.next-step::before {
     content: "";
 
     position: absolute;
 
-    top: 0;
-    right: 0;
+    width: 280px;
+    height: 280px;
 
-    width: 3px;
-    height: 100%;
+    right: -100px;
+    bottom: -150px;
 
-    background: var(--gold);
+    border-radius: 50%;
+
+    border: 1px solid rgba(143, 227, 176, 0.25);
+
+    box-shadow:
+        0 0 0 30px rgba(143, 227, 176, 0.04),
+        0 0 0 60px rgba(143, 227, 176, 0.025);
 }
 
 
-/* Status */
-
-.next-step::before {
+.next-step::after {
     content: "STATUS: PASS";
 
-    display: block;
+    position: absolute;
 
-    margin-bottom: 15px;
+    top: 30px;
+    right: 35px;
 
-    color: var(--green-signal);
+    padding: 7px 11px;
 
-    font-family: var(--font-mono);
-    font-size: 10px;
+    border: 1px solid rgba(143, 227, 176, 0.35);
+
+    border-radius: 4px;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.65rem;
+
     font-weight: 600;
 
-    letter-spacing: 0.10em;
+    letter-spacing: 0.08em;
+
+    color: var(--signal);
+
+    background: rgba(143, 227, 176, 0.06);
 }
 
 
 .next-step h2 {
-    margin-bottom: 10px;
+    position: relative;
 
-    font-family: var(--font-editorial);
-    font-size: clamp(28px, 4vw, 38px);
-    font-weight: 500;
+    max-width: 650px;
+
+    font-family: "Newsreader", serif;
+
+    font-size: clamp(2.5rem, 5vw, 4rem);
+
+    font-weight: 400;
+
     font-style: italic;
 
     line-height: 1;
+
+    letter-spacing: -0.035em;
 }
 
 
 .next-step p {
-    max-width: 700px;
+    position: relative;
 
-    color: var(--text-muted);
+    max-width: 650px;
 
-    font-size: 14px;
-    line-height: 1.7;
+    margin-top: 20px;
+
+    color: rgba(243, 239, 230, 0.7);
+
+    font-size: 0.95rem;
 }
 
 
@@ -552,50 +641,54 @@ main {
 ========================================================= */
 
 .button {
+    position: relative;
+
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 
-    margin-top: 22px;
+    margin-top: 30px;
 
-    padding: 12px 18px;
+    padding: 14px 20px;
 
-    color: var(--ink);
+    border: 1px solid var(--signal);
 
-    background: var(--green-signal);
+    border-radius: 6px;
 
-    border: 1px solid var(--green-signal);
-    border-radius: 4px;
+    background: var(--signal);
 
-    font-family: var(--font-mono);
-    font-size: 11px;
+    color: var(--deep-green);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.75rem;
+
     font-weight: 700;
 
-    text-decoration: none;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
 
-    letter-spacing: 0.04em;
+    text-decoration: none;
 
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease;
+        background 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
 }
 
 
 .button::after {
-    content: "→";
+    content: "↗";
 
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 
 .button:hover {
-    transform: translateY(-2px);
-
-    color: var(--green-signal);
-
     background: transparent;
+
+    color: var(--signal);
+
+    transform: translateY(-2px);
 }
 
 
@@ -604,156 +697,191 @@ main {
 ========================================================= */
 
 footer {
-    padding: 30px 0;
-
-    border-top: 1px solid var(--border);
-
-    color: rgba(243, 239, 230, 0.45);
-
-    font-family: var(--font-mono);
-    font-size: 10px;
+    position: relative;
 
     text-align: center;
 
+    overflow: hidden;
+
+    padding: 32px 0;
+
+    border-top: 1px solid rgba(143, 227, 176, 0.15);
+
+    background: #0F3D2E;
+
+    color: rgba(243, 239, 230, 0.65);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 0.65rem;
+
     letter-spacing: 0.04em;
+
+    text-transform: uppercase;
 }
 
 
+/* Grade técnica — mesma linguagem do header */
+
+footer::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(143, 227, 176, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(143, 227, 176, 0.04) 1px,
+            transparent 1px
+        );
+
+    background-size: 48px 48px;
+
+    mask-image: linear-gradient(
+        to top,
+        black,
+        transparent 100%
+    );
+
+    pointer-events: none;
+}
+
+
+/* Conteúdo acima da textura */
+
+footer .container {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Pequeno indicador técnico */
+
+footer .container::before {
+    content: "QA / DOCUMENTATION";
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #8FE3B0;
+
+    font-size: 0.55rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+}
+
+
+
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVIDADE
 ========================================================= */
 
 @media (max-width: 800px) {
+
+    header {
+        padding: 80px 0 75px;
+    }
+
+    main {
+        padding: 70px 0;
+    }
 
     .requirements {
         grid-template-columns: 1fr;
     }
 
-    .section {
-        padding: 65px 0;
+    .next-step {
+        padding: 40px 30px;
     }
 
-    .card {
-        min-height: 130px;
+    .next-step::after {
+        position: static;
+
+        display: inline-block;
+
+        margin-bottom: 25px;
     }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 520px) {
 
     .container {
-        width: min(92%, 520px);
+        width: min(100% - 32px, 1120px);
     }
 
-
-    header {
-        padding: 65px 0 55px;
+    header h1 {
+        font-size: 4rem;
     }
-
-
-    header::before {
-        font-size: 9px;
-    }
-
-
-    h1 {
-        font-size: clamp(48px, 16vw, 70px);
-
-        letter-spacing: -2px;
-    }
-
-
-    .subtitle {
-        font-size: 15px;
-    }
-
-
-    .section {
-        padding: 55px 0;
-    }
-
-
-    .section-title {
-        font-size: 34px;
-    }
-
-
-    .section-description {
-        margin-bottom: 28px;
-
-        font-size: 14px;
-    }
-
 
     .card {
-        gap: 16px;
+        align-items: flex-start;
 
-        padding: 20px;
+        padding: 22px;
 
-        min-height: 120px;
+        min-height: auto;
     }
-
-
-    .image-link,
-    .icon {
-        width: 58px;
-        height: 58px;
-    }
-
 
     .image-link {
-        flex-basis: 58px;
-    }
+        width: 58px;
+        height: 58px;
 
+        margin-right: 16px;
+    }
 
     .icon {
-        padding: 10px;
+        width: 36px;
+        height: 36px;
     }
 
+    .card-content {
+        padding-right: 15px;
+    }
 
     .card h3 {
-        font-size: 16px;
+        font-size: 1rem;
     }
-
 
     .card p {
-        font-size: 12px;
+        font-size: 0.8rem;
     }
-
 
     .arrow {
-        display: none;
-    }
+        right: 15px;
+        top: 15px;
 
+        width: 27px;
+        height: 27px;
+    }
 
     .next-step {
-        margin-top: 35px;
-
-        padding: 26px 24px;
+        padding: 35px 24px;
     }
-
 
     .next-step h2 {
-        font-size: 30px;
-    }
-
-
-    .next-step p {
-        font-size: 13px;
-    }
-
-
-    .button {
-        width: 100%;
-
-        justify-content: center;
+        font-size: 2.7rem;
     }
 }
 
 
 /* =========================================================
-   REDUCED MOTION
+   ACESSIBILIDADE
 ========================================================= */
+
+:focus-visible {
+    outline: 3px solid var(--signal);
+
+    outline-offset: 4px;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
 
